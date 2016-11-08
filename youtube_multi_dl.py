@@ -23,11 +23,11 @@ music_options = { 'writethumbnail':True,
 				'outtmpl': '~/Music/Youtube_dl/%(title)s.%(ext)s',
 				'noplaylist':True,
 				'nocheckcertificate':True,
-				'postprocessors': [{'key': 'FFmpegExtractAudio',	# down here is where the conversion happens,
-									'preferredcodec': 'mp3',		# preferred audio format can be changed,
+				'postprocessors': [{'key': 'FFmpegExtractAudio',			# down here is where the conversion happens,
+									'preferredcodec': 'mp3',	# preferred audio format can be changed,
 									'preferredquality': '192',},	# the quality has not much difference because
-									{'key': 'EmbedThumbnail'}]}		# the audio scrapped is already downgraded by YT
-																	# did some research... not true HD audio.
+									{'key': 'EmbedThumbnail'}]}	# the audio scrapped is already downgraded by YT
+													# did some research... not true HD audio.
 
 # for now resolution is hardcoded to 720p (better for my kind of bandwidth)
 video_options = { 'format':'bestvideo[height<=720]+bestaudio/best[height<=720]',
