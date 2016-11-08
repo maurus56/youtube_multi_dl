@@ -4,7 +4,7 @@ This is one of my first programs, the initial focus was to create a simple music
 downloader to satisfy personal needs. While creating it, people started asking
 for a coppy so in the en I decided to make it more intuitive through the terminal.
 
-The program lacks speed so for now il'l try to implement some sort of multithreading.
+The program lacks speed so for now il'l try to implement some sort of multithreading (there's a method called workers).
 Possible GUI in the future.
 
 
