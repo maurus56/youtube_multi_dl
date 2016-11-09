@@ -19,13 +19,13 @@ import youtube_dl
 music_options = { 'writethumbnail':True,
 				'format':'bestaudio/best',
 				'extractaudio':True,
-				'audioformat':'mp3',
+				'audioformat':'best',
 				'outtmpl': '~/Music/Youtube_dl/%(title)s.%(ext)s',
 				'noplaylist':True,
 				'nocheckcertificate':True,
 				'postprocessors': [{'key': 'FFmpegExtractAudio',			# down here is where the conversion happens,
 									'preferredcodec': 'mp3',	# preferred audio format can be changed,
-									'preferredquality': '192',},	# the quality has not much difference because
+									'preferredquality': '0',},	# the quality has not much difference because
 									{'key': 'EmbedThumbnail'}]}	# the audio scrapped is already downgraded by YT
 													# did some research... not true HD audio.
 
