@@ -1,4 +1,4 @@
-# youtube_multi_dl
+# Youtube_multi_dl
 
 This is one of my first programs, the initial focus was to create a simple music/video
 downloader to satisfy personal needs. While creating it, people started asking
@@ -12,3 +12,10 @@ Lets see how further we can make this small proyect go. Maybe an OS multi plataf
 
 
 This was mostly the easiest thigs I could pull out. Now the work is to level up the complicity.
+
+# Requirements
+
+You need to have the following installed:
+
+- youtube_dl
+- ffmpeg (for the mp3 convertion)
