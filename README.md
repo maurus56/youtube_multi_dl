@@ -17,3 +17,4 @@ You need to have the following installed:
 
 - youtube_dl
 - ffmpeg (for the mp3 convertion)
+- aria2 (for faster downloads)
