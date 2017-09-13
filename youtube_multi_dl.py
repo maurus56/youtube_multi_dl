@@ -98,19 +98,18 @@ def download_links_(options):
         '\nInsert link (separate multiple links by space)\n>>> ').split(" ")
 
     print 'Links to download: %d' % len(links)
-    count = 1
 
     # the actual music downloader
-    for link in links:
+    while len(links) != 0:
         # links counter feedback
-        print '\nDownloading link %d/%d' % (count, len(links))
-
+        link = links.pop(0)
+        print '\nRemaining links %d' % (len(links))
         try:
             with youtube_dl.YoutubeDL(options) as ydl:
                 ydl.download([link])
-            count += 1
         except:
-            print "Error"
+            links.append(link)
+            print "Error: link will retry after this batch"
 #/////////////////////////////////////////////#
 
 
