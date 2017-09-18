@@ -22,22 +22,23 @@ MUSIC_OPTIONS_ = {
     'format': 'bestaudio/best',
     'extractaudio': True,
     'audioformat': 'best',
-    'outtmpl': '~/Music/Youtube_dl/%(title)s.%(ext)s',
+    'outtmpl': '~/Music/Youtube_dl/%(uploader)s/%(title)s.%(ext)s',
     'noplaylist': True,
-    'externaldownloader': 'aria2c',                 # fast downloader
-    'externaldownloaderargs': '-x 4 -k 2M',			# number of threads for each download and split size
+    'youtubeskipdashmanifest': True,
     'nocheckcertificate': True,
-    'postprocessors': [{'key': 'FFmpegExtractAudio',	# down here is where the conversion happens,
-                        'preferredcodec': 'm4a',		# preferred audio format can be changed,
-                        'preferredquality': '0', },		# set to convert to best,
-                       {'key': 'EmbedThumbnail'}]}		# default with ffmpeg seems like 185kbps
+    'externaldownloader': 'aria2c',
+    'externaldownloaderargs': '-x 4 -k 2M',
+    'postprocessors': [{'key': 'FFmpegExtractAudio',
+                        'preferredcodec': 'm4a',
+                        'preferredquality': '0', },
+                       {'key': 'EmbedThumbnail'}]}
 #/////////////////////////////////////////////#
 VIDEO_OPTIONS_ = {
-    'format': 'best[height<=360]',						                    # change high for better resolution
-    'outtmpl': '~/Movies/Youtube_dl/%(uploader)s/%(title)s.%(ext)s',		# download path
+    'format': 'best[height<=360]',
+    'outtmpl': '~/Movies/Youtube_dl/%(uploader)s/%(title)s.%(ext)s',
     'noplaylist': True,
-    'externaldownloader': 'aria2c',						                    # fast downloader
-    'externaldownloaderargs': '-x 4 -k 20M',                                # number of threads for each download and split size
+    'externaldownloader': 'aria2c',
+    'externaldownloaderargs': '-x 4 -k 20M',
     'nocheckcertificate': True}
 #/////////////////////////////////////////////#
 
