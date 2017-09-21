@@ -21,7 +21,10 @@ MUSIC_OPTIONS_ = {
     'externaldownloaderargs': '-x 4 -k 2M',
     'postprocessors': [{'key': 'FFmpegExtractAudio',
                         'preferredcodec': 'm4a',
-                        'preferredquality': '0', },
+                        'preferredquality': '0'},
+                       {'key': 'MetadataFromTitle',
+                        'titleformat': '(?P<title>.+)\ \-\ (?P<artist>.+)'},
+                       {'key': 'FFmpegMetadata'},
                        {'key': 'EmbedThumbnail'}]}
 #/////////////////////////////////////////////#
 VIDEO_OPTIONS_ = {
@@ -98,7 +101,8 @@ def download_links_(options):
         try:
             with youtube_dl.YoutubeDL(options) as ydl:
                 ydl.download([link])
-        except:
+        except (youtube_dl.utils.DownloadError,youtube_dl.utils.ContentTooShortError,youtube_dl.utils.ExtractorError) as e:
+            print(e)
             links.append(link)
             print "Error: link will retry after this batch"
 #/////////////////////////////////////////////#
@@ -108,7 +112,7 @@ def music_download_():
     """
     Creates and modifies [download options]
         - Playlist
-    \n Calls download function with [download options]
+    \nCalls download function with [download options]
     """
 
     music_options = MUSIC_OPTIONS_.copy()
@@ -117,6 +121,7 @@ def music_download_():
     if (raw_input('\nIs Playlist?.....Yes[y]\n>>> ')) == 'y':
         print 'Download option set to download playlists...'
         del music_options['noplaylist']
+        music_options['downloadarchive'] = '~/Music/Youtube_dl/%(uploader)s/%(playlist)s/archive.txt'
         music_options['outtmpl'] = '~/Music/Youtube_dl/%(uploader)s/%(playlist)s/%(title)s.%(ext)s'
 
     #////////////////////#
@@ -140,6 +145,7 @@ def video_download_():
     if (raw_input('\nIs Playlist?.....Yes[y]\n>>> ')) == 'y':
         print 'Download option set to download Playlists...'
         del video_options['noplaylist']
+        video_options['downloadarchive'] = '~/Movies/Youtube_dl/%(uploader)s/%(playlist)s/archive.txt'
 
         if (raw_input('\nSave Playlist Index?.....Yes[y]\n>>> ')) == 'y':
             print 'Saving Playlist index...'
