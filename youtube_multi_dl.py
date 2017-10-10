@@ -4,6 +4,7 @@
 
 ######################
 from __future__ import unicode_literals
+import time
 import youtube_dl
 ######################
 
@@ -23,12 +24,12 @@ MUSIC_OPTIONS_ = {
                         'preferredcodec': 'm4a',
                         'preferredquality': '0'},
                        {'key': 'MetadataFromTitle',
-                        'titleformat': '(?P<title>.+)\ \-\ (?P<artist>.+)'},
+                        'titleformat': r'(?P<title>.+)\ \-\ (?P<artist>.+)'},
                        {'key': 'FFmpegMetadata'},
                        {'key': 'EmbedThumbnail'}]}
 #/////////////////////////////////////////////#
 VIDEO_OPTIONS_ = {
-    'format': 'best[height<=360]',
+    'format': 'best[height<=720]',
     'outtmpl': '~/Movies/Youtube_dl/%(uploader)s/%(title)s.%(ext)s',
     'noplaylist': True,
     'externaldownloader': 'aria2c',
@@ -86,25 +87,36 @@ def download_links_(options):
     Asks user to input links
     \nDownloads the links with the given [args]
     """
-
+    retry = 5
     # loads multiple links to a list
     links = raw_input(
         '\nInsert link (separate multiple links by space)\n>>> ').split(" ")
 
     print 'Links to download: %d' % len(links)
 
-    # the actual music downloader
-    while len(links) != 0:
-        # links counter feedback
-        link = links.pop(0)
-        print '\nRemaining links %d' % (len(links))
-        try:
-            with youtube_dl.YoutubeDL(options) as ydl:
-                ydl.download([link])
-        except (youtube_dl.utils.DownloadError,youtube_dl.utils.ContentTooShortError,youtube_dl.utils.ExtractorError) as e:
-            print(e)
-            links.append(link)
-            print "Error: link will retry after this batch"
+    for i in xrange(retry):
+        num_ = len(links)
+        if num_ != 0:
+            for x in xrange(num_):
+                # links counter feedback
+                print '\nRemaining links %d' % (len(links))
+                link = links.pop(0)
+
+                try:
+                    with youtube_dl.YoutubeDL(options) as ydl:
+                        ydl.download([link])
+                except (youtube_dl.utils.DownloadError, youtube_dl.utils.ContentTooShortError, youtube_dl.utils.ExtractorError) as e:
+                    print e
+                    links.append(link)
+                    print "Error: link will retry after this batch"
+            num_ = len(links)
+        else: pass
+
+        if num_ != 0:
+            print "Done batch. '%i' failed, will retry after 10s" % len(links)
+            print "Remainig retries: %i" % (retry-i)
+            time.sleep(10)
+        else: break
 #/////////////////////////////////////////////#
 
 
