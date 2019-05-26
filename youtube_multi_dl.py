@@ -24,7 +24,7 @@ MUSIC_OPTIONS_ = {
                         'preferredcodec': 'm4a',
                         'preferredquality': '0'},
                        {'key': 'MetadataFromTitle',
-                        'titleformat': r'(?P<title>.+)\ \-\ (?P<artist>.+)'},
+                        'titleformat': r'(?P<title>.+) - (?P<artist>.+)'},
                        {'key': 'FFmpegMetadata'},
                        {'key': 'EmbedThumbnail'}]}
 #/////////////////////////////////////////////#
