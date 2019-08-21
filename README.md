@@ -1,8 +1,7 @@
 # Youtube_multi_dl
 
 This is one of my first programs, the initial focus was to create a simple music/video
-downloader to satisfy personal needs. While creating it, people started asking
-for a copy so in the end I decided to make it more intuitive through the terminal.
+downloader to satisfy personal needs. Probably a decent UI will comein the future.
 
 # Requirements
 
